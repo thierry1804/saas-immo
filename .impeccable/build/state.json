@@ -1,0 +1,215 @@
+{
+  "tool": "build-phase",
+  "version": 2,
+  "startedAt": "2026-11-22T17:01:04.994Z",
+  "comp": ".impeccable/mocks/decision/assigned.png",
+  "direction": "e5171d13",
+  "breakpoint": "390x844",
+  "artifact": null,
+  "phase": "hero",
+  "phases": {
+    "comps": {
+      "status": "skipped",
+      "openedAt": null,
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [
+        {
+          "at": "2026-11-22T17:01:04.994Z",
+          "text": "started with an approved comp; the comp round happened before this state (surface round or manual)"
+        }
+      ],
+      "gate": null,
+      "forced": null
+    },
+    "spec": {
+      "status": "closed",
+      "openedAt": "2026-11-22T17:01:04.994Z",
+      "closedAt": "2026-11-22T17:04:55.290Z",
+      "attempts": 2,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "14 regions, 3 plates, 9 text regions measured",
+        "at": "2026-11-22T17:04:55.290Z"
+      },
+      "forced": null
+    },
+    "plates": {
+      "status": "closed",
+      "openedAt": "2026-11-22T17:04:55.290Z",
+      "closedAt": "2026-11-22T17:05:42.847Z",
+      "attempts": 3,
+      "notes": [],
+      "gate": {
+        "ok": true,
+        "reasons": [],
+        "summary": "3/3 plates",
+        "at": "2026-11-22T17:05:42.847Z"
+      },
+      "forced": null
+    },
+    "hero": {
+      "status": "open",
+      "openedAt": "2026-11-22T17:05:42.847Z",
+      "closedAt": null,
+      "attempts": 1,
+      "notes": [],
+      "gate": {
+        "ok": false,
+        "reasons": [
+          "hero overall 63.5% < 72% (structure 47%, color 88%, detail 47%)",
+          "region line-pending is missing (detail 11%, structure 44%): the comp shows material the build does not",
+          "region send is missing (detail 11%, structure 36%): the comp shows material the build does not",
+          "plate slip-grain is placed but not at the comp's box: its ink spans 67x59px at (0,22) in the comp region and 3x84px at (75,0) in the build; size and position the <img> to the spec box (object-fit: cover), not to the surrounding layout",
+          "region wordmark (text) is contradicted (structure 24%, detail added 21%): the composition of this text region differs from the comp; re-derive it from the spec box",
+          "region org-line (text) is contradicted (structure 25%, detail added 18%): the composition of this text region differs from the comp; re-derive it from the spec box",
+          "region mission-line (text) is contradicted (structure 29%, detail added 15%): the composition of this text region differs from the comp; re-derive it from the spec box",
+          "region line-gps (text) is contradicted (structure 24%, detail added 22%): the composition of this text region differs from the comp; re-derive it from the spec box",
+          "region line-saved (text) is contradicted (structure 31%, detail added 22%): the composition of this text region differs from the comp; re-derive it from the spec box",
+          "the build carries ink in 5 grid cells where the comp is calm (E0, H0, A1, B1, A9); nothing exists on the page that the comp does not show (a kicker, an extra nav item, a divider, a second row of controls); remove it or name it in a stated decision after the hero passes"
+        ],
+        "summary": "hero 63% (drift)",
+        "score": 0.6346,
+        "verdict": "drift",
+        "report": ".impeccable/review/diff/hero/report.json",
+        "sideBySide": "/media/thr/Projets3/saas-immo/.impeccable/review/diff/hero/side-by-side.png",
+        "worst": [
+          "send missing 21%",
+          "line-gps contradicted 36%",
+          "wordmark contradicted 39%"
+        ],
+        "worstIds": [
+          "send",
+          "line-gps",
+          "wordmark"
+        ],
+        "worstCrops": [
+          {
+            "id": "send",
+            "verdict": "missing",
+            "score": {
+              "overall": 0.2071,
+              "structure": 0.3625,
+              "color": 0.0618,
+              "colorIntersection": 0.0448,
+              "paletteMatch": 0.0709,
+              "detail": 0.1119,
+              "detailRaw": 0.1431,
+              "detailAdded": 0.0625,
+              "bands": 0.4
+            },
+            "file": ".impeccable/review/diff/hero/regions/send.png"
+          },
+          {
+            "id": "line-gps",
+            "verdict": "contradicted",
+            "score": {
+              "overall": 0.3571,
+              "structure": 0.2402,
+              "color": 0.6568,
+              "colorIntersection": 0.173,
+              "paletteMatch": 0.9173,
+              "detail": 0.1521,
+              "detailRaw": 0.2614,
+              "detailAdded": 0.2188,
+              "bands": 0.5
+            },
+            "file": ".impeccable/review/diff/hero/regions/line-gps.png"
+          },
+          {
+            "id": "wordmark",
+            "verdict": "contradicted",
+            "score": {
+              "overall": 0.3942,
+              "structure": 0.2421,
+              "color": 0.8377,
+              "colorIntersection": 0.6959,
+              "paletteMatch": 0.914,
+              "detail": 0.238,
+              "detailRaw": 0.3422,
+              "detailAdded": 0.2083,
+              "bands": 0.28
+            },
+            "file": ".impeccable/review/diff/hero/regions/wordmark.png"
+          }
+        ],
+        "regionVerdicts": {
+          "counter-grain": "drift",
+          "slip-grain": "drift",
+          "wordmark": "contradicted",
+          "org-line": "contradicted",
+          "mission-line": "contradicted",
+          "tariff": "drift",
+          "currency-quiet": "drift",
+          "line-photos": "drift",
+          "line-gps": "contradicted",
+          "line-saved": "contradicted",
+          "line-pending": "missing",
+          "tear": "drift",
+          "status-band": "drift",
+          "send": "missing"
+        },
+        "at": "2026-11-22T17:14:57.805Z"
+      },
+      "forced": null,
+      "records": 5,
+      "readingsSeen": {}
+    },
+    "sections": {
+      "status": "pending",
+      "openedAt": null,
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    },
+    "motion": {
+      "status": "pending",
+      "openedAt": null,
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    },
+    "responsive": {
+      "status": "pending",
+      "openedAt": null,
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    },
+    "review": {
+      "status": "pending",
+      "openedAt": null,
+      "closedAt": null,
+      "attempts": 0,
+      "notes": [],
+      "gate": null,
+      "forced": null
+    }
+  },
+  "finish": null,
+  "plates": {
+    "counter-grain": {
+      "status": "ok",
+      "score": 0.5869,
+      "size": "312x336"
+    },
+    "slip-grain": {
+      "status": "ok",
+      "score": 0.4496,
+      "size": "256x256"
+    },
+    "tear": {
+      "status": "ok",
+      "score": 0.5664,
+      "size": "780x338"
+    }
+  }
+}

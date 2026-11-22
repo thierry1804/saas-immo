@@ -1,0 +1,979 @@
+{
+  "tool": "comp-spec",
+  "version": 1,
+  "createdAt": "2026-11-22T17:02:42.719Z",
+  "comp": ".impeccable/mocks/decision/assigned.png",
+  "warnings": [
+    "region wordmark: \"codeDrawn\": true set in the regions file (the painted-material refusal is overridden: code draws this region)",
+    "region org-line: \"codeDrawn\": true set in the regions file (the painted-material refusal is overridden: code draws this region)",
+    "region mission-line: \"codeDrawn\": true set in the regions file (the painted-material refusal is overridden: code draws this region)",
+    "region tariff: \"codeDrawn\": true set in the regions file (the painted-material refusal is overridden: code draws this region)",
+    "region currency-quiet: \"codeDrawn\": true set in the regions file (the painted-material refusal is overridden: code draws this region)",
+    "region line-photos: \"codeDrawn\": true set in the regions file (the painted-material refusal is overridden: code draws this region)",
+    "region line-gps: \"codeDrawn\": true set in the regions file (the painted-material refusal is overridden: code draws this region)",
+    "region line-saved: \"codeDrawn\": true set in the regions file (the painted-material refusal is overridden: code draws this region)",
+    "region line-pending: \"codeDrawn\": true set in the regions file (the painted-material refusal is overridden: code draws this region)",
+    "region tear: \"bleed\": true set in the regions file (the clipped-artwork refusal is overridden: the page crops it there)",
+    "region status-band: \"codeDrawn\": true set in the regions file (the painted-material refusal is overridden: code draws this region)",
+    "region send: \"codeDrawn\": true set in the regions file (the painted-material refusal is overridden: code draws this region)"
+  ],
+  "uncoveredInkCells": [
+    "H4"
+  ],
+  "compSize": {
+    "width": 390,
+    "height": 844
+  },
+  "aspect": 0.4621,
+  "orientation": "portrait",
+  "palette": [
+    {
+      "hex": "#1b1b19",
+      "coverage": 0.5491
+    },
+    {
+      "hex": "#e8dbcc",
+      "coverage": 0.3273
+    },
+    {
+      "hex": "#ba5018",
+      "coverage": 0.1042
+    },
+    {
+      "hex": "#b5afa7",
+      "coverage": 0.0099
+    },
+    {
+      "hex": "#39342e",
+      "coverage": 0.0095
+    }
+  ],
+  "bands": [
+    {
+      "y": 0.1733,
+      "strength": 0.4343
+    },
+    {
+      "y": 0.2274,
+      "strength": 0.267
+    },
+    {
+      "y": 0.2599,
+      "strength": 0.4898
+    },
+    {
+      "y": 0.2816,
+      "strength": 0.3511
+    },
+    {
+      "y": 0.3032,
+      "strength": 0.3112
+    },
+    {
+      "y": 0.3357,
+      "strength": 1
+    },
+    {
+      "y": 0.4043,
+      "strength": 0.243
+    },
+    {
+      "y": 0.426,
+      "strength": 1
+    },
+    {
+      "y": 0.4693,
+      "strength": 0.4422
+    },
+    {
+      "y": 0.4982,
+      "strength": 1
+    },
+    {
+      "y": 0.5379,
+      "strength": 0.7508
+    },
+    {
+      "y": 0.5596,
+      "strength": 1
+    },
+    {
+      "y": 0.6065,
+      "strength": 0.5362
+    },
+    {
+      "y": 0.6534,
+      "strength": 0.6697
+    },
+    {
+      "y": 0.6931,
+      "strength": 0.9138
+    },
+    {
+      "y": 0.7148,
+      "strength": 0.997
+    },
+    {
+      "y": 0.7834,
+      "strength": 1
+    },
+    {
+      "y": 0.852,
+      "strength": 0.5654
+    },
+    {
+      "y": 0.8953,
+      "strength": 0.767
+    }
+  ],
+  "regions": [
+    {
+      "id": "counter-grain",
+      "kind": "texture",
+      "note": "Clean charcoal counter grain with no type, the shop ground.",
+      "grid": "I9:J9",
+      "box": {
+        "x": 0.8,
+        "y": 0.9,
+        "w": 0.2,
+        "h": 0.1
+      },
+      "px": {
+        "x": 312,
+        "y": 760,
+        "w": 78,
+        "h": 84
+      },
+      "aspect": 0.9286,
+      "palette": [
+        {
+          "hex": "#191919",
+          "coverage": 0.9821
+        },
+        {
+          "hex": "#1c2a1a",
+          "coverage": 0.0179
+        }
+      ],
+      "detail": {
+        "energy": 2.0284
+      },
+      "medium": "raster",
+      "plate": "assets/plates/counter-grain.png",
+      "text": null
+    },
+    {
+      "id": "slip-grain",
+      "kind": "texture",
+      "note": "Clean thermal paper grain with no type.",
+      "grid": "I4:J4",
+      "box": {
+        "x": 0.8,
+        "y": 0.4,
+        "w": 0.2,
+        "h": 0.1
+      },
+      "px": {
+        "x": 312,
+        "y": 338,
+        "w": 78,
+        "h": 84
+      },
+      "aspect": 0.9286,
+      "palette": [
+        {
+          "hex": "#e8dbcc",
+          "coverage": 1
+        }
+      ],
+      "detail": {
+        "energy": 6.4672
+      },
+      "medium": "raster",
+      "plate": "assets/plates/slip-grain.png",
+      "text": null
+    },
+    {
+      "id": "wordmark",
+      "kind": "text",
+      "note": "The word Veille in off-white.",
+      "grid": "C0:H1",
+      "codeDrawn": true,
+      "coverBox": {
+        "x": 0.2,
+        "y": 0,
+        "w": 0.6,
+        "h": 0.2
+      },
+      "box": {
+        "x": 0.2154,
+        "y": 0.064,
+        "w": 0.5846,
+        "h": 0.128
+      },
+      "px": {
+        "x": 84,
+        "y": 54,
+        "w": 228,
+        "h": 108
+      },
+      "aspect": 2.1111,
+      "palette": [
+        {
+          "hex": "#1b1b19",
+          "coverage": 0.6508
+        },
+        {
+          "hex": "#ebe7d9",
+          "coverage": 0.2856
+        },
+        {
+          "hex": "#beb9b1",
+          "coverage": 0.0372
+        },
+        {
+          "hex": "#5a5954",
+          "coverage": 0.0152
+        },
+        {
+          "hex": "#7f7c79",
+          "coverage": 0.0112
+        }
+      ],
+      "detail": {
+        "energy": 32.2537
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": {
+          "lines": 1,
+          "glyphs": 3,
+          "capHeightPx": 81.6,
+          "inkIsDark": false,
+          "allCaps": false,
+          "advance": 0.7725,
+          "advTall": 0.7725,
+          "advX": null,
+          "gap": 0.0184,
+          "xRatio": 0.6383,
+          "stemW": 0.1643,
+          "contrast": 1.3544,
+          "serif": 0.9957,
+          "densTall": 0.4379,
+          "densX": null,
+          "weight": 0.4379
+        },
+        "widthClass": "normal",
+        "weightClass": "regular",
+        "chosen": {
+          "family": "Lobster Two",
+          "weight": 400,
+          "fontSizePx": 110,
+          "source": "index",
+          "fp": {
+            "lines": 1,
+            "glyphs": 3,
+            "capHeightPx": 81.3,
+            "inkIsDark": true,
+            "allCaps": false,
+            "advance": 1.1312,
+            "advTall": 1.1312,
+            "advX": null,
+            "gap": 0.1291,
+            "xRatio": 0.6577,
+            "stemW": 0.1353,
+            "contrast": 1.3127,
+            "serif": 1.6316,
+            "densTall": 0.4116,
+            "densX": null,
+            "weight": 0.4116
+          },
+          "stamp": "011ff66f3801"
+        }
+      }
+    },
+    {
+      "id": "org-line",
+      "kind": "text",
+      "note": "The line ORG-A · synthétique.",
+      "grid": "A2:E2",
+      "codeDrawn": true,
+      "box": {
+        "x": 0,
+        "y": 0.2,
+        "w": 0.5,
+        "h": 0.1
+      },
+      "px": {
+        "x": 0,
+        "y": 169,
+        "w": 195,
+        "h": 84
+      },
+      "aspect": 2.3214,
+      "palette": [
+        {
+          "hex": "#1c1c1a",
+          "coverage": 0.8376
+        },
+        {
+          "hex": "#c0bdb8",
+          "coverage": 0.0635
+        },
+        {
+          "hex": "#848380",
+          "coverage": 0.0365
+        },
+        {
+          "hex": "#cd7434",
+          "coverage": 0.0329
+        },
+        {
+          "hex": "#4d4c45",
+          "coverage": 0.0294
+        }
+      ],
+      "detail": {
+        "energy": 35.5098
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": {
+          "lines": 3,
+          "glyphs": 53,
+          "capHeightPx": 14.6,
+          "inkIsDark": false,
+          "allCaps": false,
+          "advance": 0.5735,
+          "advTall": 0.592,
+          "advX": 0.5386,
+          "gap": 0.1077,
+          "xRatio": 0.7334,
+          "stemW": 0.1721,
+          "contrast": 1.0111,
+          "serif": 1.0325,
+          "densTall": 0.5481,
+          "densX": 0.6239,
+          "weight": 0.5481
+        },
+        "widthClass": "condensed",
+        "weightClass": "medium"
+      }
+    },
+    {
+      "id": "mission-line",
+      "kind": "text",
+      "note": "The line Mission H2 · contrôle standard.",
+      "grid": "A2:H2",
+      "codeDrawn": true,
+      "coverBox": {
+        "x": 0,
+        "y": 0.2,
+        "w": 0.8,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0,
+        "y": 0.2002,
+        "w": 0.6462,
+        "h": 0.0995
+      },
+      "px": {
+        "x": 0,
+        "y": 169,
+        "w": 252,
+        "h": 84
+      },
+      "aspect": 3,
+      "palette": [
+        {
+          "hex": "#1c1c1a",
+          "coverage": 0.8485
+        },
+        {
+          "hex": "#c0bdb7",
+          "coverage": 0.0544
+        },
+        {
+          "hex": "#d57330",
+          "coverage": 0.0378
+        },
+        {
+          "hex": "#84827f",
+          "coverage": 0.0324
+        },
+        {
+          "hex": "#4e4e46",
+          "coverage": 0.027
+        }
+      ],
+      "detail": {
+        "energy": 37.9469
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": {
+          "lines": 3,
+          "glyphs": 60,
+          "capHeightPx": 14.6,
+          "inkIsDark": false,
+          "allCaps": false,
+          "advance": 0.5733,
+          "advTall": 0.6101,
+          "advX": 0.5384,
+          "gap": 0.1077,
+          "xRatio": 0.7322,
+          "stemW": 0.1731,
+          "contrast": 1.0183,
+          "serif": 1.0485,
+          "densTall": 0.5505,
+          "densX": 0.6269,
+          "weight": 0.5505
+        },
+        "widthClass": "condensed",
+        "weightClass": "medium"
+      }
+    },
+    {
+      "id": "tariff",
+      "kind": "text",
+      "note": "The line Tarif figé 50 000 MGA in burnt orange.",
+      "grid": "A3:G3",
+      "codeDrawn": true,
+      "coverBox": {
+        "x": 0,
+        "y": 0.3,
+        "w": 0.7,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0,
+        "y": 0.3211,
+        "w": 0.7,
+        "h": 0.0782
+      },
+      "px": {
+        "x": 0,
+        "y": 271,
+        "w": 273,
+        "h": 66
+      },
+      "aspect": 4.1364,
+      "palette": [
+        {
+          "hex": "#e8ddce",
+          "coverage": 0.7819
+        },
+        {
+          "hex": "#191818",
+          "coverage": 0.1952
+        },
+        {
+          "hex": "#bdb8ab",
+          "coverage": 0.0102
+        },
+        {
+          "hex": "#8d3325",
+          "coverage": 0.0081
+        },
+        {
+          "hex": "#3c3c34",
+          "coverage": 0.0046
+        }
+      ],
+      "detail": {
+        "energy": 25.3676
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": null,
+        "measuredAt": "2026-11-22T17:04:55.246Z",
+        "note": "no separable lettering in the crop; size by the region box"
+      }
+    },
+    {
+      "id": "currency-quiet",
+      "kind": "text",
+      "note": "The quieter word EUR.",
+      "grid": "H3:J3",
+      "codeDrawn": true,
+      "coverBox": {
+        "x": 0.7,
+        "y": 0.3,
+        "w": 0.3,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0.7,
+        "y": 0.3211,
+        "w": 0.3,
+        "h": 0.0782
+      },
+      "px": {
+        "x": 273,
+        "y": 271,
+        "w": 117,
+        "h": 66
+      },
+      "aspect": 1.7727,
+      "palette": [
+        {
+          "hex": "#e8dbcc",
+          "coverage": 0.8182
+        },
+        {
+          "hex": "#191919",
+          "coverage": 0.1795
+        },
+        {
+          "hex": "#202818",
+          "coverage": 0.0023
+        }
+      ],
+      "detail": {
+        "energy": 6.2811
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": null,
+        "measuredAt": "2026-11-22T17:04:55.264Z",
+        "note": "no separable lettering in the crop; size by the region box"
+      }
+    },
+    {
+      "id": "line-photos",
+      "kind": "text",
+      "note": "The line Photos 6/6, with 6/6 in red.",
+      "grid": "A4:G4",
+      "codeDrawn": true,
+      "box": {
+        "x": 0,
+        "y": 0.4,
+        "w": 0.7,
+        "h": 0.1
+      },
+      "px": {
+        "x": 0,
+        "y": 338,
+        "w": 273,
+        "h": 84
+      },
+      "aspect": 3.25,
+      "palette": [
+        {
+          "hex": "#e8dccc",
+          "coverage": 0.8966
+        },
+        {
+          "hex": "#b3ada2",
+          "coverage": 0.0477
+        },
+        {
+          "hex": "#1c1c1a",
+          "coverage": 0.0321
+        },
+        {
+          "hex": "#8b2e24",
+          "coverage": 0.0144
+        },
+        {
+          "hex": "#4a4942",
+          "coverage": 0.0092
+        }
+      ],
+      "detail": {
+        "energy": 42.0799
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": {
+          "lines": 2,
+          "glyphs": 2,
+          "capHeightPx": 2.2,
+          "inkIsDark": true,
+          "allCaps": false,
+          "advance": 117.72,
+          "advTall": 117.72,
+          "advX": 117.72,
+          "gap": 0,
+          "xRatio": 0.8229,
+          "stemW": null,
+          "contrast": null,
+          "serif": null,
+          "densTall": 0.7454,
+          "densX": 0.7454,
+          "weight": 0.7454
+        },
+        "widthClass": "wide",
+        "weightClass": "black"
+      }
+    },
+    {
+      "id": "line-gps",
+      "kind": "text",
+      "note": "The line GPS hors rayon — drapeau, drapeau in red.",
+      "grid": "A5:I5",
+      "codeDrawn": true,
+      "box": {
+        "x": 0,
+        "y": 0.5,
+        "w": 0.9,
+        "h": 0.1
+      },
+      "px": {
+        "x": 0,
+        "y": 422,
+        "w": 351,
+        "h": 84
+      },
+      "aspect": 4.1786,
+      "palette": [
+        {
+          "hex": "#e8daca",
+          "coverage": 0.8967
+        },
+        {
+          "hex": "#5e5c52",
+          "coverage": 0.0335
+        },
+        {
+          "hex": "#1d1d1a",
+          "coverage": 0.0274
+        },
+        {
+          "hex": "#89867c",
+          "coverage": 0.0232
+        },
+        {
+          "hex": "#882f23",
+          "coverage": 0.0193
+        }
+      ],
+      "detail": {
+        "energy": 43.6216
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": {
+          "lines": 2,
+          "glyphs": 48,
+          "capHeightPx": 16,
+          "inkIsDark": true,
+          "allCaps": false,
+          "advance": 0.5167,
+          "advTall": 0.3808,
+          "advX": 0.5439,
+          "gap": 0.1095,
+          "xRatio": 0.6779,
+          "stemW": 0.163,
+          "contrast": 1.0097,
+          "serif": 0.8979,
+          "densTall": 0.522,
+          "densX": 0.5935,
+          "weight": 0.522
+        },
+        "widthClass": "condensed",
+        "weightClass": "medium"
+      }
+    },
+    {
+      "id": "line-saved",
+      "kind": "text",
+      "note": "The line Enregistré sur ce téléphone.",
+      "grid": "A5:I6",
+      "codeDrawn": true,
+      "coverBox": {
+        "x": 0,
+        "y": 0.5,
+        "w": 0.9,
+        "h": 0.2
+      },
+      "box": {
+        "x": 0,
+        "y": 0.5,
+        "w": 0.9,
+        "h": 0.1706
+      },
+      "px": {
+        "x": 0,
+        "y": 422,
+        "w": 351,
+        "h": 144
+      },
+      "aspect": 2.4375,
+      "palette": [
+        {
+          "hex": "#e8daca",
+          "coverage": 0.8424
+        },
+        {
+          "hex": "#181817",
+          "coverage": 0.0972
+        },
+        {
+          "hex": "#5d5951",
+          "coverage": 0.0255
+        },
+        {
+          "hex": "#862d21",
+          "coverage": 0.0188
+        },
+        {
+          "hex": "#8a867d",
+          "coverage": 0.016
+        }
+      ],
+      "detail": {
+        "energy": 40.9074
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": {
+          "lines": 2,
+          "glyphs": 24,
+          "capHeightPx": 18.7,
+          "inkIsDark": true,
+          "allCaps": true,
+          "advance": 0.508,
+          "advTall": 0.5218,
+          "advX": null,
+          "gap": 0.1098,
+          "xRatio": null,
+          "stemW": 0.1337,
+          "contrast": 0.9895,
+          "serif": 0.7727,
+          "densTall": 0.465,
+          "densX": null,
+          "weight": 0.465
+        },
+        "widthClass": "condensed",
+        "weightClass": "regular"
+      }
+    },
+    {
+      "id": "line-pending",
+      "kind": "text",
+      "note": "The line Pas encore reçu par Veille, in red.",
+      "grid": "A6:I6",
+      "codeDrawn": true,
+      "coverBox": {
+        "x": 0,
+        "y": 0.6,
+        "w": 0.9,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0,
+        "y": 0.5995,
+        "w": 0.9,
+        "h": 0.0711
+      },
+      "px": {
+        "x": 0,
+        "y": 506,
+        "w": 351,
+        "h": 60
+      },
+      "aspect": 5.85,
+      "palette": [
+        {
+          "hex": "#e8daca",
+          "coverage": 0.7673
+        },
+        {
+          "hex": "#171717",
+          "coverage": 0.1993
+        },
+        {
+          "hex": "#832d21",
+          "coverage": 0.0224
+        },
+        {
+          "hex": "#8d8a7f",
+          "coverage": 0.0057
+        },
+        {
+          "hex": "#c9afa1",
+          "coverage": 0.0053
+        }
+      ],
+      "detail": {
+        "energy": 35.4636
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null,
+      "type": {
+        "comp": null,
+        "measuredAt": "2026-11-22T17:04:55.281Z",
+        "note": "no separable lettering in the crop; size by the region box"
+      }
+    },
+    {
+      "id": "tear",
+      "kind": "plate",
+      "note": "Zigzag torn edge, paper teeth on the dark ground, no letters.",
+      "grid": "A6:J7",
+      "bleed": true,
+      "box": {
+        "x": 0,
+        "y": 0.6,
+        "w": 1,
+        "h": 0.2
+      },
+      "px": {
+        "x": 0,
+        "y": 506,
+        "w": 390,
+        "h": 169
+      },
+      "aspect": 2.3077,
+      "palette": [
+        {
+          "hex": "#1a1a1a",
+          "coverage": 0.5362
+        },
+        {
+          "hex": "#e8daca",
+          "coverage": 0.2669
+        },
+        {
+          "hex": "#bf5618",
+          "coverage": 0.1455
+        },
+        {
+          "hex": "#222717",
+          "coverage": 0.0448
+        },
+        {
+          "hex": "#822c20",
+          "coverage": 0.0066
+        }
+      ],
+      "detail": {
+        "energy": 18.9796
+      },
+      "medium": "raster",
+      "plate": "assets/plates/tear.png",
+      "text": null
+    },
+    {
+      "id": "status-band",
+      "kind": "chrome",
+      "note": "A horizontal bar, partly filled orange, the rest dark. Length shows progress.",
+      "grid": "A7:H7",
+      "codeDrawn": true,
+      "box": {
+        "x": 0,
+        "y": 0.7,
+        "w": 0.8,
+        "h": 0.1
+      },
+      "px": {
+        "x": 0,
+        "y": 591,
+        "w": 312,
+        "h": 84
+      },
+      "aspect": 3.7143,
+      "palette": [
+        {
+          "hex": "#1a1a19",
+          "coverage": 0.6791
+        },
+        {
+          "hex": "#c05618",
+          "coverage": 0.2443
+        },
+        {
+          "hex": "#242c1d",
+          "coverage": 0.0393
+        },
+        {
+          "hex": "#351408",
+          "coverage": 0.0362
+        },
+        {
+          "hex": "#482808",
+          "coverage": 0.001
+        }
+      ],
+      "detail": {
+        "energy": 10.7042
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    },
+    {
+      "id": "send",
+      "kind": "control",
+      "note": "The button labeled Envoyer le dossier.",
+      "grid": "A8:J8",
+      "codeDrawn": true,
+      "coverBox": {
+        "x": 0,
+        "y": 0.8,
+        "w": 1,
+        "h": 0.1
+      },
+      "box": {
+        "x": 0.0308,
+        "y": 0.7998,
+        "w": 0.9385,
+        "h": 0.0995
+      },
+      "px": {
+        "x": 12,
+        "y": 675,
+        "w": 366,
+        "h": 84
+      },
+      "aspect": 4.3571,
+      "palette": [
+        {
+          "hex": "#b74f17",
+          "coverage": 0.8505
+        },
+        {
+          "hex": "#efe0d1",
+          "coverage": 0.0505
+        },
+        {
+          "hex": "#181616",
+          "coverage": 0.0499
+        },
+        {
+          "hex": "#4d2008",
+          "coverage": 0.034
+        },
+        {
+          "hex": "#bd8a6b",
+          "coverage": 0.015
+        }
+      ],
+      "detail": {
+        "energy": 24.4063
+      },
+      "medium": "semantic",
+      "plate": null,
+      "text": null
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "regions": [
+    {
+      "id": "counter-grain",
+      "kind": "texture",
+      "grid": "I9:J9",
+      "note": "Clean charcoal counter grain with no type, the shop ground."
+    },
+    {
+      "id": "slip-grain",
+      "kind": "texture",
+      "grid": "I4:J4",
+      "note": "Clean thermal paper grain with no type."
+    },
+    {
+      "id": "wordmark",
+      "kind": "text",
+      "grid": "C0:H1",
+      "codeDrawn": true,
+      "note": "The word Veille in off-white."
+    },
+    {
+      "id": "org-line",
+      "kind": "text",
+      "grid": "A2:E2",
+      "codeDrawn": true,
+      "note": "The line ORG-A · synthétique."
+    },
+    {
+      "id": "mission-line",
+      "kind": "text",
+      "grid": "A2:H2",
+      "codeDrawn": true,
+      "note": "The line Mission H2 · contrôle standard."
+    },
+    {
+      "id": "tariff",
+      "kind": "text",
+      "grid": "A3:G3",
+      "codeDrawn": true,
+      "note": "The line Tarif figé 50 000 MGA in burnt orange."
+    },
+    {
+      "id": "currency-quiet",
+      "kind": "text",
+      "grid": "H3:J3",
+      "codeDrawn": true,
+      "note": "The quieter word EUR."
+    },
+    {
+      "id": "line-photos",
+      "kind": "text",
+      "grid": "A4:G4",
+      "codeDrawn": true,
+      "note": "The line Photos 6/6, with 6/6 in red."
+    },
+    {
+      "id": "line-gps",
+      "kind": "text",
+      "grid": "A5:I5",
+      "codeDrawn": true,
+      "note": "The line GPS hors rayon — drapeau, drapeau in red."
+    },
+    {
+      "id": "line-saved",
+      "kind": "text",
+      "grid": "A5:I6",
+      "codeDrawn": true,
+      "note": "The line Enregistré sur ce téléphone."
+    },
+    {
+      "id": "line-pending",
+      "kind": "text",
+      "grid": "A6:I6",
+      "codeDrawn": true,
+      "note": "The line Pas encore reçu par Veille, in red."
+    },
+    {
+      "id": "tear",
+      "kind": "plate",
+      "grid": "A6:J7",
+      "bleed": true,
+      "note": "Zigzag torn edge, paper teeth on the dark ground, no letters."
+    },
+    {
+      "id": "status-band",
+      "kind": "chrome",
+      "grid": "A7:H7",
+      "codeDrawn": true,
+      "note": "A horizontal bar, partly filled orange, the rest dark. Length shows progress."
+    },
+    {
+      "id": "send",
+      "kind": "control",
+      "grid": "A8:J8",
+      "codeDrawn": true,
+      "note": "The button labeled Envoyer le dossier."
+    }
+  ]
+}

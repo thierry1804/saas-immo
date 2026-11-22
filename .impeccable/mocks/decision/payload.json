@@ -1,0 +1,154 @@
+{
+  "title": "Monde visuel de Veille",
+  "question": "Le reçu de caisse est la direction retenue pour cette main. La garder, prendre une autre, ou relancer.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "Reçu de caisse",
+      "kicker": "THE ROLL",
+      "lineage": "comptoir mobile money, Antananarivo",
+      "thesis": "Chaque geste laisse un reçu : référence, monnaie, montant, état. Rien n’est soldé tant que le reçu n’est pas confirmé.",
+      "palette": ["#1a1714", "#f3efe6", "#c2410c", "#8f1d1d"],
+      "materials": ["papier thermique", "tapis de comptoir", "tableau de tarifs"],
+      "viewport": "Téléphone en portrait : le haut est le tarif de la mission, le centre est le reçu en train d’être coupé, le bas est le seul bouton qui fait avancer l’état réel.",
+      "risk": "Devient un gadget rétro si les lignes ne portent pas les vrais statuts métier.",
+      "raised": [
+        {
+          "from": "Catalogue de hall",
+          "raise": "Densité catalogue : les lignes de caisse et la file se touchent, sans cartes flottantes."
+        },
+        {
+          "from": "Partition Laban",
+          "raise": "Durée notée : l’avancement est une bande remplie, pas un badge."
+        },
+        {
+          "from": "Plan de métro",
+          "raise": "Couloir actif : la monnaie et la mission en cours restent encrées ; le reste reste lisible, plus calme."
+        }
+      ],
+      "comp": ".impeccable/mocks/decision/assigned.png",
+      "wireframe": {
+        "cols": 12,
+        "rows": 16,
+        "regions": [
+          {"label": "tarif mission", "x": 0, "y": 0, "w": 12, "h": 3, "accent": true},
+          {"label": "reçu", "x": 1, "y": 3, "w": 10, "h": 9},
+          {"label": "bande d’état", "x": 1, "y": 12, "w": 10, "h": 1, "accent": true},
+          {"label": "action", "x": 1, "y": 14, "w": 10, "h": 2}
+        ]
+      }
+    },
+    {
+      "id": "model-pick",
+      "label": "Carnet carbone",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "liasse quittance blanche et rose",
+      "thesis": "L’original reste, la copie part. Une correction est une nouvelle feuille, jamais un grattage.",
+      "palette": ["#161411", "#f7f1e6", "#f0c9cf", "#2b2b2b"],
+      "materials": ["liasse carbone", "souche numérotée", "encre tampon"],
+      "viewport": "Une feuille haute : la souche de la visite à gauche, la copie destinée au propriétaire à droite, le numéro de liasse en tête.",
+      "risk": "C’est la direction où atterrissent la plupart des outils « preuve papier ».",
+      "comp": ".impeccable/mocks/decision/model-pick.png"
+    },
+    {
+      "id": "challenger-boarding",
+      "label": "Carte d’embarquement",
+      "verdict": "competitive",
+      "lineage": "coupon segmenté et tableau des départs",
+      "thesis": "La mission est un coupon. Un créneau qui change reste allumé jusqu’à ce qu’on l’ait vu.",
+      "palette": ["#121410", "#e7e2d6", "#d85a1a", "#9a9488"],
+      "materials": ["coupon segmenté", "tableau à volets"],
+      "viewport": "Le coupon de la mission H2 en haut, le tableau des départs du jour en dessous, la ligne modifiée tient sa couleur.",
+      "case": "Le changement de créneau reste visible. Moins reconnu qu’un reçu mobile money.",
+      "risk": "Le vocabulaire aéroport éloigne l’agent du pas de porte.",
+      "comp": ".impeccable/mocks/decision/challenger-boarding.png",
+      "hero": "https://impeccable.style/worlds/cards/vernacular-ephemera-boarding-pass-and-gate-board-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/vernacular-ephemera-boarding-pass-and-gate-board.webp"
+    },
+    {
+      "id": "challenger-density",
+      "label": "Mosaïque dense",
+      "verdict": "competitive",
+      "lineage": "site japonais contemporain à modules jointifs",
+      "thesis": "Tout le travail du jour tient dans une mosaïque de modules filetés, sans marge de prestige.",
+      "palette": ["#f7f7f5", "#111111", "#d10000", "#c8c8c8"],
+      "materials": ["filets", "onglets", "modules jointifs"],
+      "viewport": "Un écran de bureau couvert de modules : missions, constats à relire, échéances MGA, échéances EUR, chacun avec son onglet.",
+      "case": "Le gestionnaire voit beaucoup d’un coup. L’agent au soleil s’y perd.",
+      "risk": "Le fond clair et l’onglet rouge rappellent une boutique en ligne.",
+      "comp": ".impeccable/mocks/decision/challenger-density.png",
+      "hero": "https://impeccable.style/worlds/cards/japanese-high-density-web-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/japanese-high-density-web.webp"
+    },
+    {
+      "id": "challenger-darkroom",
+      "label": "Fiche d’exposition",
+      "verdict": "competitive",
+      "lineage": "registre d’agrandisseur, feuilles calque",
+      "thesis": "Deux tentatives sur la même mission se croisent en hachures. Le conflit se voit sans pastille.",
+      "palette": ["#0e0d0c", "#f4efe6", "#e23d8c", "#6b6560"],
+      "materials": ["calque", "rampe de zones", "hachures"],
+      "viewport": "La photo de la visite sous un calque : zone GPS hachurée, seconde tentative en hachures croisées, légende en fractions.",
+      "case": "Le conflit de preuves est net. La caisse et le loyer passent au second plan.",
+      "risk": "Le laboratoire photo n’est pas le métier quotidien de la conciergerie.",
+      "comp": ".impeccable/mocks/decision/challenger-darkroom.png",
+      "hero": "https://impeccable.style/worlds/cards/operate-b-exposure-record-zone-sheets-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/operate-b-exposure-record-zone-sheets.webp"
+    },
+    {
+      "id": "challenger-catalog",
+      "label": "Catalogue de hall",
+      "verdict": "declined",
+      "lineage": "catalogue d’événement imprimé journal",
+      "thesis": "Chaque logement est une vignette timbre avec un code de table.",
+      "palette": ["#d9d3c7", "#1a1a1a", "#b45309"],
+      "materials": ["papier journal", "vignettes timbre"],
+      "viewport": "Une grille de vignettes collées bord à bord.",
+      "case": "La conciergerie ne se reconnaît pas dans un catalogue de salon. La preuve et l’argent disparaissent dans la grille.",
+      "kept": "Densité catalogue : les lignes se touchent.",
+      "risk": "Illisible dès qu’une ligne doit porter un montant et un état.",
+      "hero": "https://impeccable.style/worlds/cards/pop-culture-shelf-doujin-event-catalog-hero.webp"
+    },
+    {
+      "id": "challenger-laban",
+      "label": "Partition Laban",
+      "verdict": "declined",
+      "lineage": "partition de danse lue de bas en haut",
+      "thesis": "La checklist devient une portée : la forme dit la réponse, la hauteur dit la durée.",
+      "palette": ["#f7f4ee", "#111111", "#cfc8bc"],
+      "materials": ["papier à portée", "blocs de symbole"],
+      "viewport": "Une portée verticale, le futur au-dessus, les membres de part et d’autre.",
+      "case": "L’agent a besoin du libellé de 140 caractères, pas d’un symbole à déchiffrer.",
+      "kept": "Durée notée : l’état est une bande, pas un badge.",
+      "risk": "La portée cache la consigne au moment où l’agent est devant la porte.",
+      "hero": "https://impeccable.style/worlds/cards/notation-diagram-systems-labanotation-hero.webp"
+    },
+    {
+      "id": "challenger-transit",
+      "label": "Plan de métro",
+      "verdict": "declined",
+      "lineage": "schéma de réseau en émail nuit",
+      "thesis": "Les logements sont des stations, les missions des lignes.",
+      "palette": ["#0b1c3d", "#f4f7fb", "#e11d48", "#f59e0b"],
+      "materials": ["émail", "filets à 45 degrés"],
+      "viewport": "Un réseau coloré, la ligne du jour plus lumineuse.",
+      "case": "Le bleu de nuit est exclu par la contrainte du projet, et le plan ne dit pas qui doit quoi.",
+      "kept": "Couloir actif : une monnaie, une mission, encrées ; le reste calme.",
+      "risk": "Le réseau miniature devient illisible et bleu.",
+      "hero": "https://impeccable.style/worlds/cards/wayfinding-cartography-signage-midnight-transit-diagram-hero.webp"
+    }
+  ],
+  "reroll": { "registers": ["safer", "bolder"] },
+  "buildPath": { "value": "comp", "toggle": true },
+  "canon": true,
+  "canonCard": {
+    "label": "Le standard de la catégorie",
+    "thesis": "Logiciel de gestion : rail gauche, liste du jour, pastilles d’état, exécuté sans clin d’œil.",
+    "palette": ["#f8fafc", "#0f172a", "#1d4ed8", "#e2e8f0"],
+    "materials": ["rail fixe", "tableau", "pastilles"],
+    "viewport": "Rail de navigation, titre de page, quatre indicateurs, tableau des missions.",
+    "risk": "Indiscernable des autres logiciels de gestion, par construction.",
+    "comp": ".impeccable/mocks/decision/canon.png"
+  },
+  "steer": true
+}

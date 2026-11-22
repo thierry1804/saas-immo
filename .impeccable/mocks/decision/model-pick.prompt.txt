@@ -1,0 +1,13 @@
+Portrait phone screen, first viewport only, full bleed, no device bezel, no browser chrome, no URL bar, no status icons. Flat capture of the Veille app at full fidelity, sharp type, one surface.
+
+Regions in order, with scale:
+
+Region 1, top 9 percent of the height, a single line on paper #f7f1e6. Left, the word Veille in #161411. Right, the book number Liasse 014 · synthétique in #2b2b2b. Nothing else in this band.
+
+Region 2, the remaining 91 percent, one tall carbon-copy receipt sheet, nearly edge to edge. Vertical split: left 36 percent is the white original stub #f7f1e6, headed Souche — visite H2, with a narrow column of stub serial numbers and a perforated tear down the join. Right 64 percent is the pink carbon duplicate #f0c9cf, headed Copie propriétaire P1. Same sheet, two halves. Faint carbon rules, no extra words.
+
+Region 3, inside the lower third of the pink half: the figures 50 000 MGA, large, in #161411. Under them, a rubber stamp reading Original intact in #2b2b2b ink, slightly askew. No strikethrough, no scraped digits, no erasure. A hairline edge of a second blank sheet shows only under the bottom of this sheet.
+
+Materials: numbered stub, carbon sheet, stamp ink. Palette only #161411, #f7f1e6, #f0c9cf, #2b2b2b. No blue, no green, no orange, no photographs, no icons, no KPI cards, no charts, no sidebar, no buttons, no tabs, no SaaS chrome, no rounded cards.
+
+French text exactly: Veille / Liasse 014 · synthétique / Souche — visite H2 / Copie propriétaire P1 / 50 000 MGA / Original intact. No other words, no dates, no addresses, no people.

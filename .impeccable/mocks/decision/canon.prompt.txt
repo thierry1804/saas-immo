@@ -1,0 +1,9 @@
+Wide desktop application screen, 16:9, full bleed, no browser chrome, no window frame, no device mockup, no wallpaper. Ordinary property-management software, the category standard played straight: clean, competent, flat, indistinguishable from a typical admin product. No irony, no retro cash receipt, no thermal paper, no rubber stamps, no textures, no photographs, no illustrations, no testimonials, no charts, no trend arrows, no decorative copy, no hero.
+
+Structure, named in order with scale:
+1. Fixed left rail, full height, about one sixth of the width. Background #f8fafc, 1px right border #e2e8f0. Top: product name "Veille" in #0f172a. Under it, a vertical list of text links in #0f172a: "Pilotage", "Patrimoine", "Missions" (selected, color #1d4ed8), "Constats", "Interventions", "Facturation", "Paiements". Bottom of the rail: "ORG-A".
+2. Main column filling the rest, background #f8fafc, ordinary padding. Page title "Missions" in #0f172a. Directly beneath the title, the single word "synthétique" in #0f172a. That word appears exactly once on the whole screen.
+3. One row of four equal metric indicators under the title. Each panel is white, 1px border #e2e8f0, 8px corner radius, no shadow. Labels and values, nothing else: "Mission" / "H2"; "Montant" / "50 000 MGA"; "Monnaie" / "MGA"; "État" / "À relire". No percentages, no dates, no extra figures.
+4. A table of missions below, filling the remaining width. White panel, 1px border #e2e8f0, 8px radius. Header: "Mission", "Objet", "État", "Montant". One data row only: "H2", "Visite", a small status pill "À relire", and "50 000 MGA". The pill is a small rounded label, fill #e2e8f0, text #1d4ed8, not a stamp. No other rows, no addresses, no person names, no other amounts.
+
+Palette only #f8fafc, #0f172a, #1d4ed8, #e2e8f0, plus white panels. Neutral sans-serif. French interface. Spell every quoted string exactly, with accents. Straight-on orthographic view of the interface alone.

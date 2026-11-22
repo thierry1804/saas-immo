@@ -1,0 +1,9 @@
+Finished mobile product screen, portrait, full bleed edge to edge, no phone bezel, no browser chrome, no status bar, no URL bar. Flat graphic UI, sharp and fully rendered. Strict four-color palette only: ground #121410, paper and primary letters #e7e2d6, alert #d85a1a, muted #9a9488. No blue, no green, no extra colors, no gradients, no glass, no drop shadows, no glows, no rounded SaaS cards, no icons, no photos, no metric tiles.
+
+Two stacked regions only.
+
+Top region, 42% of the height, full width: one physical boarding-pass coupon, paper #e7e2d6, ink #121410. Square corners, a semicircular notch on each side, horizontal perforation dashes dividing the coupon into four equal segments. Top of the coupon, large and readable: VEILLE at left, H2 at right. Segment 1 label LOGEMENT, value ORG-A. Segment 2 label CRÉNEAU, value 09:40. Segment 3 label AGENT, value A1. Segment 4 label STATUT, value À PARTIR. The lowercase word synthétique appears exactly once, small, color #9a9488, at the bottom right of the coupon, and nowhere else.
+
+Bottom region, 58% of the height, full width, ground #121410: a live departure board in condensed split-flap capitals. Heading DÉPARTS in #e7e2d6, left aligned. Four rows separated by 1px rules in #9a9488. Columns: mission, time, agent, status. Row 1: H1, 08:00, A1, PARTI, letters #e7e2d6. Row 2 is the changed slot and stays lit: H2, old time 09:40 in #9a9488, new time 10:15 inside a solid flat rectangle of #d85a1a that does not blink, fade, or glow, status DÉCALÉ in #d85a1a. Row 3: H3, 11:30, A1, PRÊT. Row 4: H4, 15:00, A1, PRÉVU. Orange #d85a1a appears only on that time cell and the word DÉCALÉ.
+
+French spelling exact. Product name Veille clearly readable. All text inside the central 80% of the width; left and right edges are only the same paper and the same board color. No extra headlines, no English, no sentences.

@@ -1,19 +1,31 @@
-/* Veille PWA — service worker placeholder (L00).
- * Remplacé en L03 par une version migrable avec IndexedDB et file d'envoi.
- */
-const CACHE = 'veille-shell-v0';
+const CACHE = 'veille-shell-v1';
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(['/'])));
   self.skipWaiting();
+  event.waitUntil(caches.open(CACHE));
 });
 
 self.addEventListener('activate', (event) => {
-  event.waitUntil(self.clients.claim());
+  event.waitUntil(
+    caches
+      .keys()
+      .then((keys) => Promise.all(keys.filter((key) => key !== CACHE).map((key) => caches.delete(key))))
+      .then(() => self.clients.claim()),
+  );
 });
 
 self.addEventListener('fetch', (event) => {
+  const request = event.request;
+  if (request.method !== 'GET') return;
   event.respondWith(
-    caches.match(event.request).then((cached) => cached || fetch(event.request)),
+    fetch(request)
+      .then((response) => {
+        if (response.ok && new URL(request.url).origin === self.location.origin) {
+          const copy = response.clone();
+          void caches.open(CACHE).then((cache) => cache.put(request, copy));
+        }
+        return response;
+      })
+      .catch(() => caches.match(request)),
   );
 });

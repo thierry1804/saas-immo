@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Scaffold reference: assigned.png</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lobster+Two:wght@400&display=swap">
+  <link rel="stylesheet" href="layout.css">
+  <style>html,body{margin:0}body{background:#1b1b19}.region{box-sizing:border-box}.region.text p{white-space:pre-wrap}</style>
+</head>
+<body>
+<!-- Reference only. Every region sits at its measured box inside a comp-aspect frame. Take the boxes (layout.css), keep your own semantic structure. -->
+<main class="comp-frame" style="max-width:390px">
+  <div class="r-counter-grain region texture" data-region="counter-grain" style="background-image:url('../../../assets/plates/counter-grain.png');background-repeat:repeat"></div>
+  <div class="r-slip-grain region texture" data-region="slip-grain" style="background-image:url('../../../assets/plates/slip-grain.png');background-repeat:repeat"></div>
+  <div class="r-wordmark region text" data-region="wordmark"><!-- The word Veille in off-white. --><p style="font-size:var(--r-wordmark-font);font-family:var(--r-wordmark-family),sans-serif;font-weight:var(--r-wordmark-weight);line-height:1.05;margin:0">wordmark</p></div>
+  <div class="r-org-line region text" data-region="org-line"><!-- The line ORG-A · synthétique. --><p style="font-size:var(--r-org-line-font);line-height:1.05;margin:0">org-line</p></div>
+  <div class="r-mission-line region text" data-region="mission-line"><!-- The line Mission H2 · contrôle standard. --><p style="font-size:var(--r-mission-line-font);line-height:1.05;margin:0">mission-line</p></div>
+  <div class="r-tariff region text" data-region="tariff"><!-- The line Tarif figé 50 000 MGA in burnt orange. --><p style="line-height:1.05;margin:0">tariff</p></div>
+  <div class="r-currency-quiet region text" data-region="currency-quiet"><!-- The quieter word EUR. --><p style="line-height:1.05;margin:0">currency-quiet</p></div>
+  <div class="r-line-photos region text" data-region="line-photos"><!-- The line Photos 6/6, with 6/6 in red. --><p style="font-size:var(--r-line-photos-font);line-height:1.05;margin:0">line-photos</p></div>
+  <div class="r-line-gps region text" data-region="line-gps"><!-- The line GPS hors rayon — drapeau, drapeau in red. --><p style="font-size:var(--r-line-gps-font);line-height:1.05;margin:0">line-gps</p></div>
+  <div class="r-line-saved region text" data-region="line-saved"><!-- The line Enregistré sur ce téléphone. --><p style="font-size:var(--r-line-saved-font);line-height:1.05;margin:0">line-saved</p></div>
+  <div class="r-line-pending region text" data-region="line-pending"><!-- The line Pas encore reçu par Veille, in red. --><p style="line-height:1.05;margin:0">line-pending</p></div>
+  <figure class="r-tear region plate" data-region="tear"><img src="../../../assets/plates/tear.png" alt="" style="width:100%;height:100%;object-fit:contain;object-position:top left"></figure>
+  <div class="r-status-band region chrome" data-region="status-band"><!-- A horizontal bar, partly filled orange, the rest dark. Length shows progress. --></div>
+  <div class="r-send region control" data-region="send"><!-- The button labeled Envoyer le dossier.: rebuild the control's chrome from the crop (comp-spec.mjs --crop send); its ink box, border, fill, radius, and label size are the comp's --></div>
+</main>
+</body>
+</html>

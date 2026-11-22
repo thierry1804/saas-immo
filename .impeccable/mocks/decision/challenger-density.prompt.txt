@@ -1,0 +1,13 @@
+Orthographic full-bleed desktop UI screenshot, landscape, no browser chrome, no device, no perspective. Japanese contemporary high-density site: the whole frame is packed with tiny type and hairline rules, like a printed ledger. Zero empty regions. Every module is filled with tight rows from its top rule to its bottom rule.
+
+Palette only #f7f7f5 ground, #111111 text, #d10000 tabs, #c8c8c8 1px rules. No blue, no shadow, no radius, no gradient, no photo, no icon, no chart.
+
+Header, 6% height, full width. Left tiny text: Veille    ORG-A « synthétique ». The word synthétique appears once. Right: four small square red tabs with white tiny labels: Missions, Constats, Échéances, Anomalies.
+
+Body edge to edge, three columns split by vertical hairlines, no gaps.
+
+Left column 36% width, full height, title Missions du jour, then a continuous tight list of at least 16 rows separated by hairlines, repeating only these lines and no numbers: Affecter la visite. Préparer l'accès. Relire le constat. Publier le rapport. Préparer le reversement. Clôturer la mission.
+
+Center column 34% width, split in two equal modules by a horizontal hairline. Top title Constats à relire, then at least 8 tight rows repeating: Constat reçu. Amendement à relire. Rapport à publier. Scellé à vérifier. Bottom title Anomalies, then at least 8 tight rows repeating: Anomalie ouverte. Signalement à relire. Accès impossible. Visite non reçue.
+
+Right column 30% width, split in two equal modules. Top title Échéances MGA. Rows only these two, repeated: Loyer 1 000 000 MGA. Échéance 50 000 MGA. No euro in this module. Bottom title Échéances EUR. Every row is exactly: Échéance 20 EUR. No MGA, no loyer, no 50 000, no 1 000 000 in this module. Do not combine the currencies.

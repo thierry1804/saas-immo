@@ -6,7 +6,7 @@ services:
       POSTGRES_USER: veille
       POSTGRES_PASSWORD: veille
     ports:
-      - "5432:5432"
+      - "5434:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./docs/l00/schema/tranche-1.sql:/docker-entrypoint-initdb.d/01-tranche-1.sql:ro
@@ -20,7 +20,7 @@ services:
   redis:
     image: redis:7-alpine
     ports:
-      - "6379:6379"
+      - "6381:6379"
 
   minio:
     image: minio/minio:latest
@@ -29,8 +29,8 @@ services:
       MINIO_ROOT_USER: veille
       MINIO_ROOT_PASSWORD: veilleminio
     ports:
-      - "9000:9000"
-      - "9001:9001"
+      - "9010:9000"
+      - "9011:9001"
     volumes:
       - minio_data:/data
 

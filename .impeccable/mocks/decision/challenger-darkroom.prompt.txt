@@ -1,0 +1,9 @@
+A portrait phone screen filling the entire frame, no device bezel, no browser chrome, no status bar, no URL bar, no home indicator. Flat print, square corners, no shadows. Palette only #0e0d0c, #f4efe6, #e23d8c, #6b6560. No blue, no gradients, no cards, no badges, no pills, no buttons, no icons.
+
+Region 1, top band, full width, one tenth of the height, solid #0e0d0c. Left aligned, the word "Veille" in #f4efe6, readable, medium technical gothic. Directly under it, "Mission H2" in #6b6560, smaller. At the right of the same band, a zone ramp of three equal squares in a row: #0e0d0c, #6b6560, #f4efe6.
+
+Region 2, the next six tenths of the height, full width. A photographic print of a plain residential doorway, no people, no lettering, no sky, tones only #0e0d0c, #6b6560 and #f4efe6. A translucent tracing sheet in #f4efe6 lies over the print with a straight inset margin; the doorway stays visible through the sheet. On the left third of the sheet, dense parallel diagonal hatch in #6b6560. In the center, two hatch bands crossing at exactly ninety degrees in #6b6560, one horizontal and one vertical, equal weight. In the upper right of the sheet, one small solid rectangle filled #e23d8c. That rectangle is the only magenta in the image.
+
+Region 3, the bottom three tenths, full width, solid #0e0d0c, separated from the print by a one-pixel rule in #6b6560. Left aligned stacked lines, no boxes and no containers. Exact lines, in order: "1/2 tentative" in #f4efe6, "2/2 tentative" in #f4efe6, "GPS hors rayon" in #f4efe6, "synthétique" in #6b6560. The word synthétique appears once. No other text anywhere.
+
+Keep every glyph, both hatches, and the magenta rectangle inside the central eighty percent of the width. Sharp full-fidelity exposure record, technical gothic, tracing sheet, graphite hatch, not a poster.

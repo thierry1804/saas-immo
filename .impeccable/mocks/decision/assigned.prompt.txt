@@ -1,0 +1,17 @@
+Portrait mobile app screen, the entire frame is the first viewport, no phone bezel, no browser chrome, no status bar, no keyboard. Aspect tall phone. The screen itself is a mobile-money counter: rubber counter in shop charcoal #1a1714, never a cream page.
+
+Layout top to bottom, full fidelity, one surface:
+
+1. Top band, about one fifth of the height, full width: a painted tariff board on the charcoal counter. Large readable painted name “Veille”. Directly beneath, small type only once: “ORG-A · synthétique”. Next line: “Mission H2 · contrôle standard”. Next line, full ink burnt orange #c2410c: “Tarif figé 50 000 MGA”. On the same board, the letters “EUR” only, smaller, quieter, low-contrast charcoal, no euro amount.
+
+2. Center, a little over half the height: a thermal receipt #f3efe6 being cut, edge to edge, touching the left and right edges, horizontal rules like a counter slip, no floating card, no rounded panel, no drop shadow. Serrated cut along the bottom of the paper. Thermal-printer lines, exact spelling, in charcoal and ariary red #8f1d1d:
+Photos 6/6
+GPS hors rayon — drapeau
+Enregistré sur ce téléphone
+Pas encore reçu par Veille
+
+3. On the lower part of that receipt, one solid status band: a horizontal bar whose fill length shows progress, about two thirds of the receipt width, burnt orange #c2410c on a thin charcoal track. Not a badge, not a pill, not a percent chip, no number on the bar.
+
+4. Bottom fifth: rubber counter #1a1714 and one solid button, modest corners, burnt orange #c2410c, label exactly “Envoyer le dossier”.
+
+Palette only: #1a1714, #f3efe6, #c2410c, #8f1d1d. Materials: thermal paper, rubber counter, painted tariff board. No blue, no neon, no glass, no cream background, no KPI cards, no photos, no extra words, no customers, no prices besides 50 000 MGA. Sharp readable French type.
