@@ -1,0 +1,306 @@
+openapi: 3.1.0
+info:
+  title: Veille API — Catalogue sync agent
+  description: Types d'actions POST /agent/sync/actions (contrats §4.3.1)
+  version: 0.1.0
+components:
+  schemas:
+    SyncActionsBatch:
+      type: object
+      required: [device_id, actions]
+      properties:
+        device_id:
+          type: string
+          format: uuid
+        actions:
+          type: array
+          minItems: 1
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/SyncAction'
+
+    SyncAction:
+      type: object
+      required:
+        - action_id
+        - type
+        - payload_version
+        - payload
+        - sequence_number
+        - captured_at_device
+      properties:
+        action_id:
+          type: string
+          format: uuid
+        local_visit_id:
+          type: string
+          format: uuid
+        mission_id:
+          type: string
+          format: uuid
+        assignment_revision:
+          type: integer
+          minimum: 1
+        snapshot_version:
+          type: integer
+          minimum: 1
+        sequence_number:
+          type: integer
+          minimum: 1
+        type:
+          $ref: '#/components/schemas/SyncActionType'
+        captured_at_device:
+          type: string
+          format: date-time
+        payload_version:
+          type: integer
+          minimum: 1
+        payload:
+          type: object
+          description: Schéma selon type ; version inconnue → rejected pour cette action seule
+
+    SyncActionType:
+      type: string
+      enum:
+        - urgent_alert_raised
+        - visit_started
+        - position_recorded
+        - checklist_answer_recorded
+        - photo_captured
+        - anomaly_reported
+        - visit_impossible_declared
+        - prospect_presence_recorded
+        - inventory_ack_collected
+        - clock_anchor_observed
+        - visit_closed_local
+
+    SyncActionPriority:
+      type: string
+      enum: [P0, P1, P2]
+      description: |
+        P0 urgent_alert_raised (avant tout blob) ;
+        P1 métadonnées visite ;
+        P2 octets médias
+
+    PayloadUrgentAlertRaised:
+      type: object
+      required: [severity, description]
+      properties:
+        severity:
+          type: string
+          enum: [critical, high]
+        description:
+          type: string
+        mission_id:
+          type: string
+          format: uuid
+        property_id:
+          type: string
+          format: uuid
+        position:
+          $ref: '#/components/schemas/Position'
+        emergency_contact_called:
+          type: boolean
+
+    PayloadVisitStarted:
+      type: object
+      required: [device_time, clock_anchor]
+      properties:
+        device_time:
+          type: string
+          format: date-time
+        clock_anchor:
+          type: string
+        position:
+          $ref: '#/components/schemas/Position'
+
+    PayloadPositionRecorded:
+      type: object
+      required: [position, context]
+      properties:
+        position:
+          $ref: '#/components/schemas/Position'
+        context:
+          type: string
+          enum: [arrival, end, photo, other]
+
+    PayloadChecklistAnswerRecorded:
+      type: object
+      required: [item_key, answer]
+      properties:
+        item_key:
+          type: string
+        answer:
+          type: string
+          enum: [conform, non_conform, not_applicable]
+        note:
+          type: string
+          nullable: true
+        not_applicable_reason:
+          type: string
+          nullable: true
+
+    PayloadPhotoCaptured:
+      type: object
+      required: [media_id, sha256, size_bytes, mime]
+      properties:
+        media_id:
+          type: string
+          format: uuid
+        item_key:
+          type: string
+          nullable: true
+        sha256:
+          type: string
+          pattern: '^[a-f0-9]{64}$'
+        size_bytes:
+          type: integer
+        mime:
+          type: string
+        processing:
+          type: object
+          properties:
+            crop:
+              type: boolean
+            blur:
+              type: boolean
+
+    PayloadAnomalyReported:
+      type: object
+      required: [category, severity, note]
+      properties:
+        category:
+          type: string
+        severity:
+          type: string
+        note:
+          type: string
+        media_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+
+    PayloadVisitImpossibleDeclared:
+      type: object
+      required: [reason_code]
+      properties:
+        reason_code:
+          type: string
+        note:
+          type: string
+        media_ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+
+    PayloadProspectPresenceRecorded:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+          enum: [verified, deferred]
+        challenge_resolved:
+          type: boolean
+        defer_reason:
+          type: string
+          nullable: true
+
+    PayloadInventoryAckCollected:
+      type: object
+      required: [inventory_version, inventory_hash, party, method]
+      properties:
+        inventory_version:
+          type: integer
+        inventory_hash:
+          type: string
+        party:
+          type: string
+        method:
+          type: string
+          enum: [otp, signature]
+        proof:
+          type: string
+        reservations:
+          type: string
+          nullable: true
+
+    PayloadClockAnchorObserved:
+      type: object
+      required: [server_anchor, local_monotonic_ms]
+      properties:
+        server_anchor:
+          type: string
+          format: date-time
+        local_monotonic_ms:
+          type: integer
+
+    PayloadVisitClosedLocal:
+      type: object
+      required: [manifest_hash, expected_action_count, expected_media_count]
+      properties:
+        manifest_hash:
+          type: string
+          pattern: '^[a-f0-9]{64}$'
+        expected_action_count:
+          type: integer
+        expected_media_count:
+          type: integer
+
+    Position:
+      type: object
+      required: [lat_e7, lon_e7, accuracy_mm, measured_at]
+      properties:
+        lat_e7:
+          type: integer
+          description: Latitude × 10^7
+        lon_e7:
+          type: integer
+          description: Longitude × 10^7
+        accuracy_mm:
+          type: integer
+        measured_at:
+          type: string
+          format: date-time
+        stale:
+          type: boolean
+
+    SyncActionsResult:
+      type: object
+      required: [data, meta]
+      properties:
+        data:
+          type: object
+          required: [results]
+          properties:
+            results:
+              type: array
+              items:
+                type: object
+                required: [action_id, status]
+                properties:
+                  action_id:
+                    type: string
+                    format: uuid
+                  status:
+                    type: string
+                    enum: [accepted, duplicate, rejected]
+                  error_code:
+                    type: string
+                    nullable: true
+                  server_event_id:
+                    type: string
+                    format: uuid
+                    nullable: true
+        meta:
+          type: object
+          required: [request_id, server_time]
+          properties:
+            request_id:
+              type: string
+              format: uuid
+            server_time:
+              type: string
+              format: date-time

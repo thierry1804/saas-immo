@@ -1,0 +1,795 @@
+openapi: 3.1.0
+info:
+  title: Veille API — Commandes tranche 1
+  description: |
+    Commandes Identity, Property, Fieldwork, Evidence.
+    Base `/api/v1`. Lectures API Platform fusionnées ultérieurement.
+    Source métier : specs/Veille-contrats-techniques.md §3.2.
+  version: 0.1.0
+servers:
+  - url: /api/v1
+tags:
+  - name: Auth
+  - name: Devices
+  - name: Organizations
+  - name: Properties
+  - name: Checklists
+  - name: Missions
+  - name: AgentSync
+  - name: Media
+  - name: Visits
+  - name: Reports
+
+paths:
+  /auth/otp/request:
+    post:
+      tags: [Auth]
+      summary: Demander un OTP
+      operationId: authOtpRequest
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [channel, intent]
+              properties:
+                channel:
+                  type: string
+                  enum: [sms, email]
+                destination:
+                  type: string
+                intent:
+                  type: string
+                  enum: [login, device_enroll, magic_link]
+      responses:
+        '200':
+          description: Challenge créé (réponse anti-énumération)
+          content:
+            application/json:
+              schema:
+                $ref: 'errors.yaml#/components/schemas/SuccessEnvelope'
+        '429':
+          $ref: 'errors.yaml#/components/responses/TooManyRequests'
+
+  /auth/otp/verify:
+    post:
+      tags: [Auth]
+      summary: Vérifier un OTP
+      operationId: authOtpVerify
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [challenge_id, code]
+              properties:
+                challenge_id:
+                  type: string
+                  format: uuid
+                code:
+                  type: string
+                  pattern: '^[0-9]{6}$'
+      responses:
+        '200':
+          description: Session admin ou jetons agent selon intent
+        '401':
+          $ref: 'errors.yaml#/components/responses/Unauthorized'
+
+  /auth/password:
+    post:
+      tags: [Auth]
+      summary: Connexion mot de passe (gestionnaire/admin)
+      operationId: authPassword
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [identifier, password]
+              properties:
+                identifier:
+                  type: string
+                password:
+                  type: string
+                  format: password
+      responses:
+        '200':
+          description: MFA requis ou session établie
+        '401':
+          $ref: 'errors.yaml#/components/responses/Unauthorized'
+
+  /auth/mfa:
+    post:
+      tags: [Auth]
+      summary: Second facteur
+      operationId: authMfa
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [mfa_token, code]
+              properties:
+                mfa_token:
+                  type: string
+                code:
+                  type: string
+      responses:
+        '200':
+          description: Session cookie établie
+        '401':
+          $ref: 'errors.yaml#/components/responses/Unauthorized'
+
+  /auth/token/refresh:
+    post:
+      tags: [Auth]
+      summary: Renouveler JWT agent via refresh opaque
+      operationId: authTokenRefresh
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [refresh_token]
+              properties:
+                refresh_token:
+                  type: string
+      responses:
+        '200':
+          description: access_token + nouveau refresh_token
+        '401':
+          $ref: 'errors.yaml#/components/responses/Unauthorized'
+
+  /auth/magic/request:
+    post:
+      tags: [Auth]
+      summary: Demander un lien magique
+      operationId: authMagicRequest
+      responses:
+        '200':
+          description: Accusé anti-énumération
+
+  /auth/magic/exchange:
+    post:
+      tags: [Auth]
+      summary: Échanger un jeton magique à usage unique
+      operationId: authMagicExchange
+      responses:
+        '200':
+          description: Session du compte concerné
+        '401':
+          $ref: 'errors.yaml#/components/responses/Unauthorized'
+
+  /devices:
+    post:
+      tags: [Devices]
+      summary: Inscrire un appareil agent/apporteur
+      operationId: devicesRegister
+      parameters:
+        - $ref: 'errors.yaml#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [device_identifier, pin]
+              properties:
+                device_identifier:
+                  type: string
+                public_key:
+                  type: string
+                pin:
+                  type: string
+                  pattern: '^[0-9]{6}$'
+                push_subscription:
+                  type: object
+      responses:
+        '201':
+          description: Appareil inscrit
+        '422':
+          $ref: 'errors.yaml#/components/responses/Unprocessable'
+
+  /devices/{id}/pin:
+    post:
+      tags: [Devices]
+      summary: Définir ou renouveler le PIN appareil
+      operationId: devicesSetPin
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - $ref: 'errors.yaml#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: PIN mis à jour
+
+  /devices/{id}/revoke:
+    post:
+      tags: [Devices]
+      summary: Révoquer un appareil
+      operationId: devicesRevoke
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - $ref: 'errors.yaml#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [reason]
+              properties:
+                reason:
+                  type: string
+      responses:
+        '200':
+          description: Appareil révoqué + audit
+
+  /organizations/{id}/memberships:
+    post:
+      tags: [Organizations]
+      summary: Inviter une appartenance
+      operationId: organizationsInviteMembership
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - $ref: 'errors.yaml#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [account_ref, roles]
+              properties:
+                account_ref:
+                  type: string
+                roles:
+                  type: array
+                  items:
+                    type: string
+                permissions:
+                  type: array
+                  items:
+                    type: string
+      responses:
+        '201':
+          description: Invitation créée
+        '403':
+          $ref: 'errors.yaml#/components/responses/Forbidden'
+
+  /properties:
+    post:
+      tags: [Properties]
+      summary: Créer un logement
+      operationId: propertiesCreate
+      parameters:
+        - $ref: 'errors.yaml#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PropertyCreate'
+      responses:
+        '201':
+          description: Logement créé
+        '422':
+          $ref: 'errors.yaml#/components/responses/Unprocessable'
+
+  /properties/{id}:
+    patch:
+      tags: [Properties]
+      summary: Mettre à jour un logement (versionnée)
+      operationId: propertiesPatch
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - $ref: 'errors.yaml#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [expected_version]
+              properties:
+                expected_version:
+                  type: integer
+                  minimum: 1
+                address:
+                  type: string
+                neighborhood:
+                  type: string
+                status:
+                  type: string
+      responses:
+        '200':
+          description: Nouvelle version courante
+        '409':
+          $ref: 'errors.yaml#/components/responses/Conflict'
+
+  /checklists/{id}/versions:
+    post:
+      tags: [Checklists]
+      summary: Créer une version brouillon de checklist
+      operationId: checklistVersionsCreate
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - $ref: 'errors.yaml#/components/parameters/IdempotencyKey'
+      responses:
+        '201':
+          description: Version brouillon
+
+  /checklist-versions/{id}/publish:
+    post:
+      tags: [Checklists]
+      summary: Publier une version (immuable)
+      operationId: checklistVersionsPublish
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - $ref: 'errors.yaml#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [expected_version]
+              properties:
+                expected_version:
+                  type: integer
+      responses:
+        '200':
+          description: Version publiée immuable
+        '409':
+          $ref: 'errors.yaml#/components/responses/Conflict'
+
+  /missions:
+    post:
+      tags: [Missions]
+      summary: Créer une mission
+      operationId: missionsCreate
+      parameters:
+        - $ref: 'errors.yaml#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MissionCreate'
+      responses:
+        '201':
+          description: Mission créée
+
+  /recurrences:
+    post:
+      tags: [Missions]
+      summary: Créer une récurrence
+      operationId: recurrencesCreate
+      parameters:
+        - $ref: 'errors.yaml#/components/parameters/IdempotencyKey'
+      responses:
+        '201':
+          description: Récurrence créée
+
+  /missions/{id}/reassign:
+    post:
+      tags: [Missions]
+      summary: Réaffecter un agent
+      operationId: missionsReassign
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - $ref: 'errors.yaml#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [agent_id, reason, expected_version]
+              properties:
+                agent_id:
+                  type: string
+                  format: uuid
+                reason:
+                  type: string
+                expected_version:
+                  type: integer
+      responses:
+        '200':
+          description: Révision d'affectation
+        '409':
+          $ref: 'errors.yaml#/components/responses/Conflict'
+
+  /missions/{id}/cancel:
+    post:
+      tags: [Missions]
+      summary: Annuler une mission
+      operationId: missionsCancel
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - $ref: 'errors.yaml#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: Mission annulée ; preuves conservées
+
+  /missions/{id}/interrupt:
+    post:
+      tags: [Missions]
+      summary: Interrompre une mission
+      operationId: missionsInterrupt
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - $ref: 'errors.yaml#/components/parameters/IdempotencyKey'
+      responses:
+        '200':
+          description: Mission interrompue
+
+  /agent/sync:
+    get:
+      tags: [AgentSync]
+      summary: Télécharger les changements autorisés
+      operationId: agentSyncPull
+      parameters:
+        - name: cursor
+          in: query
+          schema:
+            type: string
+        - name: device_id
+          in: query
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Changements et tombstones
+        '401':
+          $ref: 'errors.yaml#/components/responses/Unauthorized'
+
+  /agent/sync/actions:
+    post:
+      tags: [AgentSync]
+      summary: Pousser un lot d'actions hors ligne
+      operationId: agentSyncPush
+      description: Déduplication par action_id. Voir sync-actions.yaml.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'sync-actions.yaml#/components/schemas/SyncActionsBatch'
+      responses:
+        '200':
+          description: Résultats par action
+          content:
+            application/json:
+              schema:
+                $ref: 'sync-actions.yaml#/components/schemas/SyncActionsResult'
+
+  /media/uploads:
+    post:
+      tags: [Media]
+      summary: Initier un upload
+      operationId: mediaUploadInit
+      parameters:
+        - $ref: 'errors.yaml#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [parent_type, parent_id, size_bytes, mime, sha256]
+              properties:
+                parent_type:
+                  type: string
+                parent_id:
+                  type: string
+                  format: uuid
+                size_bytes:
+                  type: integer
+                  minimum: 1
+                mime:
+                  type: string
+                sha256:
+                  type: string
+                  pattern: '^[a-f0-9]{64}$'
+      responses:
+        '201':
+          description: upload_id et paramètres limités
+        '403':
+          $ref: 'errors.yaml#/components/responses/Forbidden'
+
+  /media/uploads/{id}/complete:
+    post:
+      tags: [Media]
+      summary: Finaliser un upload multipart
+      operationId: mediaUploadComplete
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - $ref: 'errors.yaml#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [parts, sha256]
+              properties:
+                parts:
+                  type: array
+                  items:
+                    type: object
+                sha256:
+                  type: string
+      responses:
+        '200':
+          description: Objet vérifié
+        '422':
+          $ref: 'errors.yaml#/components/responses/Unprocessable'
+
+  /visits/{id}/finalize:
+    post:
+      tags: [Visits]
+      summary: Finaliser une visite avec manifeste
+      operationId: visitsFinalize
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - $ref: 'errors.yaml#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VisitFinalize'
+      responses:
+        '200':
+          description: Reçu complet et scellé
+        '409':
+          $ref: 'errors.yaml#/components/responses/Conflict'
+        '422':
+          description: Éléments manquants (INCOMPLETE_EVIDENCE / MISSING_MEDIA)
+
+  /visits/{id}/amendments:
+    post:
+      tags: [Visits]
+      summary: Amender un constat scellé
+      operationId: visitsAmend
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - $ref: 'errors.yaml#/components/parameters/IdempotencyKey'
+      responses:
+        '201':
+          description: Nouveau scellé lié
+
+  /missions/{id}/review:
+    post:
+      tags: [Visits]
+      summary: Contrôle gestionnaire d'une mission
+      operationId: missionsReview
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - $ref: 'errors.yaml#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [visit_id, decision, expected_version]
+              properties:
+                visit_id:
+                  type: string
+                  format: uuid
+                decision:
+                  type: string
+                  enum: [complete, unable, complement_required]
+                flag_resolutions:
+                  type: array
+                  items:
+                    type: object
+                expected_version:
+                  type: integer
+      responses:
+        '200':
+          description: Mission completed/unable ou complément
+        '409':
+          $ref: 'errors.yaml#/components/responses/Conflict'
+
+  /reports/{id}/publish:
+    post:
+      tags: [Reports]
+      summary: Publier un rapport
+      operationId: reportsPublish
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - $ref: 'errors.yaml#/components/parameters/IdempotencyKey'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [report_version_id, expected_version]
+              properties:
+                report_version_id:
+                  type: string
+                  format: uuid
+                expected_version:
+                  type: integer
+      responses:
+        '200':
+          description: Publication et notifications en file
+
+  /reports/{id}/exports:
+    post:
+      tags: [Reports]
+      summary: Demander un export PDF ou claim_bundle
+      operationId: reportsExport
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - $ref: 'errors.yaml#/components/parameters/IdempotencyKey'
+      responses:
+        '202':
+          description: Opération asynchrone
+          content:
+            application/json:
+              schema:
+                $ref: 'errors.yaml#/components/schemas/AsyncAccepted'
+
+  /verify/{opaque_code}:
+    get:
+      tags: [Reports]
+      summary: Vérification publique minimale
+      operationId: verifyPublic
+      parameters:
+        - name: opaque_code
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: hash
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Métadonnées minimales
+
+components:
+  schemas:
+    PropertyCreate:
+      type: object
+      required: [owner_id, address, timezone]
+      properties:
+        owner_id:
+          type: string
+          format: uuid
+        address:
+          type: string
+        neighborhood:
+          type: string
+        latitude_e7:
+          type: integer
+        longitude_e7:
+          type: integer
+        timezone:
+          type: string
+          example: Indian/Antananarivo
+        characteristics:
+          type: object
+
+    MissionCreate:
+      type: object
+      required: [property_id, agent_id, scheduled_start, checklist_version_id, type]
+      properties:
+        property_id:
+          type: string
+          format: uuid
+        agent_id:
+          type: string
+          format: uuid
+        scheduled_start:
+          type: string
+          format: date-time
+        scheduled_end:
+          type: string
+          format: date-time
+        checklist_version_id:
+          type: string
+          format: uuid
+        type:
+          type: string
+          enum: [visit, inventory_entry, inventory_exit, control, prospect]
+
+    VisitFinalize:
+      type: object
+      required: [manifest, manifest_hash, expected_version]
+      properties:
+        manifest:
+          type: object
+          description: Manifeste JCS — schema_version, faits, médias ordonnés
+        manifest_hash:
+          type: string
+          pattern: '^[a-f0-9]{64}$'
+        expected_version:
+          type: integer

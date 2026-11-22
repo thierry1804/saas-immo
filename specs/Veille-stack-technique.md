@@ -1,10 +1,14 @@
 # Veille — Stack technique retenue
 
-Version 1.0 — 22 novembre 2026
+Version 1.2 — 22 novembre 2026
+
+Livrables exécutables L00 (OpenAPI, SQL/RLS, ADR, maquettes, squelette) : [`docs/l00/`](../docs/l00/README.md).
 
 ## 1. Décision d’architecture
 
-La plateforme Veille est développée comme un **monolithe modulaire Laravel** avec un frontend web/PWA. Cette décision privilégie la cohérence transactionnelle des workflows immobiliers et financiers tout en conservant une séparation claire des domaines métier.
+La plateforme Veille est développée comme un **monolithe modulaire Symfony LTS** avec un back-office Twig et une PWA Next.js pour le terrain. Cette décision privilégie la cohérence transactionnelle des workflows immobiliers et financiers tout en conservant une séparation claire des domaines métier.
+
+Organisation dépôt : monorepo plat `backend/` + `frontend/` (pas de packages partagés au démarrage).
 
 Les seuls compromis autorisés sont des adaptateurs externes interchangeables. Aucun prestataire de paiement ne doit devenir une dépendance directe du cœur métier.
 
@@ -12,23 +16,26 @@ Les seuls compromis autorisés sont des adaptateurs externes interchangeables. A
 
 | Domaine | Technologie proposée | Justification |
 |---|---|---|
-| Backend | Laravel maintenu sur une version LTS | Validation, autorisations, files, transactions, API et tests structurés |
-| Langage | PHP avec typage strict | Écosystème Laravel mature et compatible avec les applications transactionnelles |
-| API | Laravel REST/OpenAPI | Contrats explicites, pagination, idempotence et codes d’erreur stables |
+| Backend | Symfony maintenu sur une version LTS | Validation, sécurité, DI, Messenger, API et tests structurés |
+| Langage | PHP avec typage strict | Écosystème Symfony mature et compatible avec les applications transactionnelles |
+| API lecture / CRUD | API Platform | Ressources, filtres, pagination et OpenAPI pour les accès en lecture |
+| API commandes | Controllers Symfony + DTO / handlers | Workflows métier, idempotence et commandes financières hors modèle CRUD |
 | Base principale | PostgreSQL | Transactions ACID, contraintes, clés étrangères composites et calculs financiers fiables |
-| Accès données | Eloquent plus SQL ciblé | ORM pour les workflows courants ; SQL explicite pour les agrégats et contraintes complexes |
+| Accès données | Doctrine ORM plus SQL ciblé | ORM pour les workflows courants ; SQL explicite pour les agrégats et contraintes complexes |
 | File/cache | Redis | Outbox, notifications, tâches planifiées, cache non autoritatif |
-| Worker | Laravel Horizon ou équivalent | Priorités urgences/paiements, retries, dead letters et supervision |
-| Frontend PWA | Livewire ou Blade/Inertia selon les écrans | Réduction de la duplication et support cohérent des rôles web |
-| Application terrain | PWA installable Android | Hors ligne requis ; IndexedDB, service worker et reprise des transferts |
+| Worker | Symfony Messenger | Priorités urgences/paiements, retries, dead letters et supervision |
+| Back-office | Twig (+ Symfony UX au besoin) | Écrans admin et rôles internes rendus côté serveur |
+| Application terrain | Next.js PWA installable Android | Hors ligne requis ; IndexedDB, service worker et reprise des transferts |
+| Auth admin | Sessions Symfony Security | Cookies HttpOnly, Secure et SameSite appropriés |
+| Auth terrain | JWT d’accès court + refresh opaque serveur | MFA, appareils agent, révocation et horizon d’autorisation limité |
 | Stockage objet | MinIO ou S3 compatible | Médias privés, versionnage, reprise par parties et URLs temporaires |
 | Recherche | PostgreSQL au démarrage | Évite une infrastructure supplémentaire tant que les volumes restent ceux de la recette |
 | Observabilité | Logs structurés + Sentry | Erreurs, latences, files, rapprochements et restaurations observables |
 | Conteneurs locaux | Docker Compose | Reproductibilité du développement et des recettes |
 
-## 3. Organisation Laravel
+## 3. Organisation Symfony
 
-Le dépôt doit suivre une organisation modulaire correspondant aux frontières fonctionnelles des contrats techniques :
+Le dépôt suit une organisation modulaire par domaines sous `src/`, avec une couche applicative par domaine et peu de bundles techniques (SharedKernel, Infrastructure). Les domaines correspondent aux frontières fonctionnelles des contrats techniques :
 
 - `Identity` : comptes, appartenances, MFA, appareils et sessions
 - `Property` : propriétaires, logements, mandats, consignes et checklists
@@ -43,7 +50,9 @@ Le dépôt doit suivre une organisation modulaire correspondant aux frontières 
 - `Referrals` : revendications, commissions et litiges
 - `Communications` : notifications, modèles et tentatives d’envoi
 
-Les modules communiquent par services applicatifs et événements métier. Ils ne lisent pas directement les tables internes d’un autre domaine. Les commandes financières changent l’état, écrivent l’audit et insèrent l’événement Outbox dans la même transaction PostgreSQL.
+Chaque domaine expose Application / Domain / Infrastructure. Les modules communiquent par services applicatifs et événements métier. Ils ne lisent pas directement les tables internes d’un autre domaine. Les commandes financières changent l’état, écrivent l’audit et insèrent l’événement Outbox dans la même transaction PostgreSQL.
+
+Les lectures et listes filtrées passent par API Platform. Les commandes métier (paiement, scellement, approbation, sync hors ligne) passent par des controllers et handlers dédiés. Une OpenAPI unique documente les deux chemins.
 
 ## 4. Monnaies, paiements et intégrations
 
@@ -97,7 +106,7 @@ La version 1 ne doit pas faire confiance à une API de décaissement sans valida
 
 ## 5. PWA hors ligne
 
-Le frontend terrain utilise :
+Le frontend terrain (Next.js) utilise :
 
 - IndexedDB pour les références, actions, brouillons, blobs et file d’envoi
 - un service worker migrable
@@ -129,8 +138,9 @@ Les documents publiés, constats scellés, paiements confirmés et écritures va
 ## 7. Sécurité
 
 - HTTPS obligatoire
-- sessions sécurisées avec HttpOnly, Secure et SameSite appropriés
-- protection CSRF sur les commandes
+- sessions sécurisées avec HttpOnly, Secure et SameSite appropriés pour le back-office Twig
+- protection CSRF sur les commandes session
+- tokens opaque ou JWT révocables + refresh pour Next.js / PWA
 - MFA obligatoire pour les rôles sensibles
 - Argon2id pour les mots de passe et secrets suffisamment adaptables
 - OTP vérifié pour les appareils agent/apporteur
@@ -173,7 +183,7 @@ Docker n’est pas une exigence pour la production. L’hébergement peut utilis
 - sauvegardes PostgreSQL complètes avec journalisation continue
 - sauvegardes objet indépendantes
 - restauration testée
-- exécution fiable des workers
+- exécution fiable des workers Messenger
 - tâches planifiées supervisées
 - secrets hors du dépôt
 - comptes marchands réels interdits en développement
@@ -183,16 +193,18 @@ Docker n’est pas une exigence pour la production. L’hébergement peut utilis
 ### Développement
 
 - Docker Compose
-- PHP, Composer et Laravel
+- PHP, Composer et Symfony
 - PostgreSQL
 - Redis
 - MinIO ou stockage objet compatible S3
 - HTTPS local
 - données et prestataires simulés
+- Next.js pour la PWA terrain
 
 ### Production initiale
 
-- application Laravel sur une VM ou plateforme PaaS
+- application Symfony sur une VM ou plateforme PaaS
+- workers Messenger supervisés
 - PostgreSQL géré avec sauvegarde continue
 - Redis géré ou supervisé
 - stockage objet versionné
@@ -200,6 +212,7 @@ Docker n’est pas une exigence pour la production. L’hébergement peut utilis
 - monitoring et Sentry
 - sauvegarde et restauration indépendantes
 - séparation stricte développement, recette et production
+- déploiement Next.js (PWA) versionné séparément ou via le même pipeline
 
 Une architecture distribuée ou microservices n’est pas justifiée au démarrage. Elle serait introduite uniquement après observation d’un besoin réel impossible à satisfaire dans le monolithe modulaire.
 
@@ -207,11 +220,11 @@ Une architecture distribuée ou microservices n’est pas justifiée au démarra
 
 Avant implémentation, le dépôt doit produire :
 
-1. OpenAPI complète avec schémas et erreurs
-2. migrations PostgreSQL avec contraintes et unicités
+1. OpenAPI complète avec schémas et erreurs (API Platform + commandes)
+2. migrations Doctrine / PostgreSQL avec contraintes et unicités
 3. diagrammes d’état et tests de transition
 4. schéma versionné du manifeste et fixtures JCS/SHA-256
-5. outbox, inbox, idempotence et politiques de rejeu
+5. outbox, inbox, idempotence et politiques de rejeu (Messenger)
 6. adaptateurs testables pour les quatre moyens intégrés
 7. propriétés de journal, affectation, conversion et rapprochement
 8. procédures PWA, restauration, mise à jour et support agent

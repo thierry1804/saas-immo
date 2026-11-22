@@ -1,14 +1,16 @@
 # Veille — Contrats techniques de développement
 
-Version 2.1 — 22 novembre 2026. À lire avec la [spécification fonctionnelle](Veille-specification-fonctionnelle.md) et le [plan de recette](Veille-plan-developpement-recette.md).
+Version 2.2 — 22 novembre 2026. À lire avec la [spécification fonctionnelle](Veille-specification-fonctionnelle.md) et le [plan de recette](Veille-plan-developpement-recette.md).
 
 Ces contrats fixent les comportements observables et les invariants à implémenter. Ils ne prétendent pas constituer une implémentation existante ou une intégration prestataire déjà vérifiée. Les états indiqués en anglais sont les valeurs persistées ; les interfaces affichent des libellés français.
+
+Artefacts exécutables L00 (OpenAPI tranche 1, schéma SQL/RLS, ADR) : [`docs/l00/`](../docs/l00/README.md). Les routes de la section 3.2 restent la norme ; leur transcription OpenAPI commence dans `docs/l00/openapi/`.
 
 ## 1 Architecture et frontières
 
 ### 1.1 Architecture de référence
 
-Monolithe modulaire Laravel pour API, règles métier, tâches et génération documentaire ; PostgreSQL pour données transactionnelles ; Redis pour files et cache non autoritatif ; stockage objet privé compatible S3 ; client Next.js avec surfaces adaptées aux rôles, dont une PWA agent. Une seule base de code backend et une seule base de code frontend suffisent. Aucun microservice n'est requis pour cette version.
+Monolithe modulaire Symfony LTS pour API, règles métier, tâches et génération documentaire ; PostgreSQL pour données transactionnelles ; Redis pour files et cache non autoritatif ; stockage objet privé compatible S3 ; back-office Twig et client Next.js (PWA agent). Une seule base de code backend et deux surfaces frontend (admin Twig, terrain Next.js) suffisent. Aucun microservice n'est requis pour cette version.
 
 Versions des runtimes et dépendances : sélectionner au démarrage des versions maintenues, les verrouiller dans les fichiers de dépendances et documenter les politiques de mise à jour. Cette spécification n'impose pas un numéro de version non vérifié.
 
@@ -564,10 +566,10 @@ Avant production : migrations répétées sur copie autorisée/anonymisée ou do
 
 ## 10 Contrats à produire dans le dépôt de développement
 
-Ces éléments sont les premiers livrables techniques à dériver de la spécification, pas des décisions métier laissées libres :
+Ces éléments sont les premiers livrables techniques à dériver de la spécification, pas des décisions métier laissées libres. État L00 : brouillons tranche 1 (Identity → Evidence) dans [`docs/l00/`](../docs/l00/README.md) ; couverture complète V1 encore à étendre.
 
-1. OpenAPI complète des routes listées, schémas JSON validés et catalogue de codes d'erreur.
-2. Migrations avec clés étrangères composites, contraintes d'exclusion, unicités et droits sur tables immuables.
+1. OpenAPI complète des routes listées, schémas JSON validés et catalogue de codes d'erreur. *(Tranche 1 amorcée : `docs/l00/openapi/`.)*
+2. Migrations avec clés étrangères composites, contraintes d'exclusion, unicités et droits sur tables immuables. *(SQL + RLS tranche 1 : `docs/l00/schema/`.)*
 3. Diagrammes d'état exécutables ou tests de transition pour chaque agrégat ; pas de changement d'état par contrôleur non protégé.
 4. Schéma versionné du manifeste, fixtures de canonisation/signature et vérification interopérable.
 5. Catalogue d'événements et outbox/inbox, clés d'idempotence, commandes de rejeu et files d'exception.

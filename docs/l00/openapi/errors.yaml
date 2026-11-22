@@ -1,0 +1,162 @@
+# Codes d'erreur et enveloppes communes — Veille API v1
+# Référence : specs/Veille-contrats-techniques.md §3.1
+
+openapi: 3.1.0
+info:
+  title: Veille API — Erreurs communes
+  version: 0.1.0
+components:
+  schemas:
+    SuccessEnvelope:
+      type: object
+      required: [data, meta]
+      properties:
+        data:
+          description: Corps métier
+        meta:
+          type: object
+          required: [request_id, server_time]
+          properties:
+            request_id:
+              type: string
+              format: uuid
+            server_time:
+              type: string
+              format: date-time
+            resource_version:
+              type: integer
+              minimum: 1
+
+    AsyncAccepted:
+      type: object
+      required: [data, meta]
+      properties:
+        data:
+          type: object
+          required: [operation_id, status_url]
+          properties:
+            operation_id:
+              type: string
+              format: uuid
+            status_url:
+              type: string
+              format: uri
+        meta:
+          $ref: '#/components/schemas/SuccessEnvelope/properties/meta'
+
+    ErrorEnvelope:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message, retryable, request_id]
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+              description: Message français destiné à l'utilisateur autorisé
+            field_errors:
+              type: object
+              additionalProperties:
+                type: array
+                items:
+                  type: string
+            retryable:
+              type: boolean
+            request_id:
+              type: string
+              format: uuid
+
+    BusinessErrorCode:
+      type: string
+      enum:
+        - INCOMPLETE_EVIDENCE
+        - ASSIGNMENT_CONFLICT
+        - MISSING_MEDIA
+        - CHECKLIST_VERSION_MISMATCH
+        - VISIT_ALREADY_SELECTED
+        - OCCUPANCY_CONFLICT
+        - SLOT_TAKEN
+        - QUOTE_SUPERSEDED
+        - PAYMENT_UNRESOLVED
+        - CURRENCY_MISMATCH
+        - INSUFFICIENT_AVAILABLE_FUNDS
+        - BENEFICIARY_NOT_APPROVED
+        - SELF_APPROVAL_FORBIDDEN
+        - LEGAL_PROFILE_NOT_VALIDATED
+        - DOCUMENT_NOT_READY
+        - IDEMPOTENCY_KEY_REUSED
+        - VERSION_CONFLICT
+        - ORGANIZATION_SUSPENDED
+        - DEVICE_REVOKED
+        - SESSION_EXPIRED
+
+  responses:
+    BadRequest:
+      description: Schéma illisible (400)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    Unauthorized:
+      description: Session absente ou expirée (401)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    Forbidden:
+      description: Action interdite (403)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    NotFound:
+      description: Objet inconnu ou hors périmètre (404)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    Conflict:
+      description: Conflit métier ou concurrence (409)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    Unprocessable:
+      description: Champs invalides (422)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    TooManyRequests:
+      description: Limitation (429)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+    ServiceUnavailable:
+      description: Indisponibilité temporaire (503)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorEnvelope'
+
+  parameters:
+    IdempotencyKey:
+      name: Idempotency-Key
+      in: header
+      required: true
+      schema:
+        type: string
+        format: uuid
+      description: Obligatoire sur POST de commande (sauf exceptions contrats §3.1)
+    ExpectedVersion:
+      name: expected_version
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+      description: Préférer le corps JSON ; query réservée aux outils
